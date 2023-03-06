@@ -1,13 +1,27 @@
-# Новое русское вино
+# New Russian wine
 
-Сайт магазина авторского вина "Новое русское вино".
+Site of the store of author's wine "New Russian wine".
 
-## Запуск
+## Launch
+1. Clone project
+```bash 
+git clone https://github.com/nekto007/wine.git
+cd wine
+```
 
-- Скачайте код
-- Запустите сайт командой `python3 main.py`
-- Перейдите на сайт по адресу [http://127.0.0.1:8000](http://127.0.0.1:8000).
+2. Install requirements
+```bash
+pip install -r requirements.txt
+```
 
-## Цели проекта
+3. Run the site with the 
+```bash 
+python main.py
+```
 
-Код написан в учебных целях — это урок в курсе по Python и веб-разработке на сайте [Devman](https://dvmn.org).
+4. Open site in browser
+[http://127.0.0.1:8000](http://127.0.0.1:8000).
+
+6. This site can be filled with another drinks if needed
+- Open ```example.xlsx``` and fill it accordingly
+- Repeat steps 4 and 5
