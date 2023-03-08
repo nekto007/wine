@@ -2,6 +2,7 @@ import datetime
 import os
 from collections import OrderedDict, defaultdict
 from http.server import HTTPServer, SimpleHTTPRequestHandler
+import sys
 
 import pandas
 from dotenv import load_dotenv
@@ -33,7 +34,10 @@ def get_sorted_products(filepath):
 
 def main():
     load_dotenv()
-    PRODUCTS_FILEPATH = os.getenv("PRODUCTS_FILEPATH")
+    if len(sys.argv) > 1:
+        PRODUCTS_FILEPATH = sys.argv[1]
+    else:
+        PRODUCTS_FILEPATH = os.getenv("PRODUCTS_FILEPATH")
     now = datetime.datetime.now()
     birth_year = 1920
     age = now.year - birth_year
