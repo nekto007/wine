@@ -1,17 +1,14 @@
 import datetime
+import os
 from collections import OrderedDict, defaultdict
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 
 import pandas
+from dotenv import load_dotenv
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-PRODUCTS_FILEPATH = 'example.xlsx'
-now = datetime.datetime.now()
-birth_year = 1920
-age = now.year - birth_year
 
-
-def ending_year(age):
+def get_ending_year(age):
     how_old = age % 100
     if 21 > how_old > 4:
         return 'лет'
@@ -24,7 +21,7 @@ def ending_year(age):
         return 'лет'
 
 
-def get_products(filepath):
+def get_sorted_products(filepath):
     df = pandas.read_excel(filepath, na_values=['N/A', 'NA'], keep_default_na=False)
     products = df.to_dict(orient="records")
     products_by_categories = defaultdict(list)
@@ -35,6 +32,12 @@ def get_products(filepath):
 
 
 def main():
+    load_dotenv()
+    PRODUCTS_FILEPATH = os.getenv("PRODUCTS_FILEPATH")
+    now = datetime.datetime.now()
+    birth_year = 1920
+    age = now.year - birth_year
+
     env = Environment(
         loader=FileSystemLoader('.'),
         autoescape=select_autoescape(['html', 'xml'])
@@ -42,8 +45,8 @@ def main():
     template = env.get_template('template.html')
     rendered_page = template.render(
         age=age,
-        years=ending_year(age),
-        categories=get_products(PRODUCTS_FILEPATH),
+        years=get_ending_year(age),
+        categories=get_sorted_products(PRODUCTS_FILEPATH),
     )
 
     with open('index.html', 'w', encoding="utf8") as file:
