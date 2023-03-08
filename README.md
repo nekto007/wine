@@ -13,13 +13,23 @@ cd wine
 ```bash
 pip install -r requirements.txt
 ```
+3. Переменные окружения
 
-3. Run the site with the 
+Для запуска программы требуется excel файл. По умолчанию указан файл: example.xlsx в .env:
+```
+PRODUCTS_FILEPATH='example.xlsx'
+```
+4. Run
+if you have specific place to excel file:
+```bash 
+python main.py path_to_file
+```
+or you might use default path to file from .env:
 ```bash 
 python main.py
 ```
 
-4. Open site in browser
+5. Open site in browser
 [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
 6. This site can be filled with another drinks if needed
