@@ -1,8 +1,8 @@
+import argparse
 import datetime
 import os
 from collections import OrderedDict, defaultdict
 from http.server import HTTPServer, SimpleHTTPRequestHandler
-import sys
 
 import pandas
 from dotenv import load_dotenv
@@ -34,10 +34,10 @@ def get_sorted_products(filepath):
 
 def main():
     load_dotenv()
-    if len(sys.argv) > 1:
-        PRODUCTS_FILEPATH = sys.argv[1]
-    else:
-        PRODUCTS_FILEPATH = os.getenv("PRODUCTS_FILEPATH")
+    parser = argparse.ArgumentParser()
+    parser.add_argument('path_to_File', nargs='?', help='Path to Excel file', default=os.getenv("PRODUCTS_FILEPATH"))
+    products_filepath = parser.parse_args().path_to_File
+
     now = datetime.datetime.now()
     birth_year = 1920
     age = now.year - birth_year
@@ -50,7 +50,7 @@ def main():
     rendered_page = template.render(
         age=age,
         years=get_ending_year(age),
-        categories=get_sorted_products(PRODUCTS_FILEPATH),
+        categories=get_sorted_products(products_filepath),
     )
 
     with open('index.html', 'w', encoding="utf8") as file:
