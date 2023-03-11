@@ -13,14 +13,15 @@ cd wine
 ```bash
 pip install -r requirements.txt
 ```
-3. Переменные окружения
+3. Environment variables
 
-Для запуска программы требуется excel файл. По умолчанию указан файл: example.xlsx в .env:
+An Excel file with beverage data is required to run the program. Create an .env file in the same folder, 
+where the script is and put the data in VARIABLE=value format there:
 ```
-PRODUCTS_FILEPATH='example.xlsx'
+PRODUCTS_FILEPATH='path_to_file'
 ```
 4. Run
-if you have specific place to excel file:
+if you have specific place to Excel file:
 ```bash 
 python main.py path_to_file
 ```
